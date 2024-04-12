@@ -10,8 +10,8 @@ description: |
 
 confinement: devmode # use 'strict' once you have the right plugs and slots
 
-# system-usernames:
-#   snap_daemon: shared
+system-usernames:
+  snap_daemon: shared
 
 hooks:
   install:
@@ -29,7 +29,7 @@ hooks:
 
 apps:
   daemon:
-    command: bin/karapace "${SNAP_DATA}"/etc/karapace/karapace.config.json
+    command: /opt/karapace/bin/start-wrapper.bash
     daemon: simple
     install-mode: disable
     plugs:
@@ -48,6 +48,8 @@ parts:
         - sentry_sdk
     python-requirements:
         - ./requirements/requirements.txt
+    stage-packages:
+        - util-linux
   wrapper:
     plugin: dump
     source: snap/local
