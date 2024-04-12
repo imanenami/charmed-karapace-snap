@@ -8,16 +8,10 @@ description: |
   of a Virtual Machine cluster and K8s cluster. It is an open source, end-to-end, production
   ready data platform on top of cloud native technologies.
 
-confinement: devmode # use 'strict' once you have the right plugs and slots
+confinement: strict
 
 system-usernames:
   snap_daemon: shared
-
-hooks:
-  install:
-    plugs:
-      - network
-      - network-bind
 
 # COS INTEGRATION
 # slots:
