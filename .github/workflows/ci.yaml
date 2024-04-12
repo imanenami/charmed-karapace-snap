@@ -59,7 +59,7 @@ jobs:
 
       - name: Check binaries
         run: |
-          password_creation=$(charmed-karapace.mkpasswd charmed-karapace.mkpasswd -u test -a sha512 testpasswd)
+          password_creation=$(charmed-karapace.mkpasswd -u test -a sha512 testpasswd)
           if echo $password_creation | grep -q '"username": "test"'; then
             echo "Password created"
           else
