@@ -1,6 +1,6 @@
 name: charmed-karapace
 base: core22
-version: '3.11.4'
+version: '3.12.0'
 summary: Karapace on a snap
 description: |
   This is a snap that bundles Karapace in order to be used in Charmed Operators, providing
@@ -23,7 +23,7 @@ system-usernames:
 
 apps:
   daemon:
-    command: /opt/karapace/bin/start-wrapper.bash
+    command: opt/karapace/bin/start-wrapper.bash
     daemon: simple
     install-mode: disable
     plugs:
@@ -36,6 +36,7 @@ parts:
   karapace:
     plugin: python
     source: https://github.com/Aiven-Open/karapace.git  # pip install git+https://github.com/Aiven-Open/karapace@main
+    source-tag: 3.12.0
     python-packages:
         - wheel
         - pip
