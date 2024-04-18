@@ -29,7 +29,7 @@ jobs:
   build:
     name: Build snap
     needs: checks
-    uses: canonical/data-platform-workflows/.github/workflows/build_snap.yaml@v0.0.0
+    uses: canonical/data-platform-workflows/.github/workflows/build_snap.yaml@v13.1.2
 
   publish:
     name: Publish Snap
