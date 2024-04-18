@@ -1,0 +1,50 @@
+name: charmed-karapace
+base: core22
+version: '3.12.0'
+summary: Karapace on a snap
+description: |
+  This is a snap that bundles Karapace in order to be used in Charmed Operators, providing
+  automated operations management from day 0 to day 2 on Karapace registry solution, on top
+  of a Virtual Machine cluster and K8s cluster. It is an open source, end-to-end, production
+  ready data platform on top of cloud native technologies.
+
+confinement: strict
+
+system-usernames:
+  snap_daemon: shared
+
+# COS INTEGRATION
+# slots:
+#   logs:
+#     interface: content
+#     source:
+#       read:
+#         - $SNAP_COMMON/var/log/karapace
+
+apps:
+  daemon:
+    command: opt/karapace/bin/start-wrapper.bash
+    daemon: simple
+    install-mode: disable
+    plugs:
+      - network
+      - network-bind
+  mkpasswd:
+    command: bin/karapace_mkpasswd
+
+parts:
+  karapace:
+    plugin: python
+    source: https://github.com/Aiven-Open/karapace.git  # pip install git+https://github.com/Aiven-Open/karapace@main
+    source-tag: ${SNAPCRAFT_PROJECT_VERSION}
+    python-packages:
+        - wheel
+        - pip
+        - sentry_sdk
+    python-requirements:
+        - ./requirements/requirements.txt
+    stage-packages:
+        - util-linux
+  wrapper:
+    plugin: dump
+    source: snap/local
