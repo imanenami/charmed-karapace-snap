@@ -50,7 +50,7 @@ jobs:
           SNAPCRAFT_STORE_CREDENTIALS: ${{ secrets.STORE_LOGIN }}
         with:
           snap: ${{ steps.get-snap-name.outputs.SNAP_FILE }}
-          release: ${{ github.ref_name }}
+          release: latest/edge
       - name: Upload snapcraft logs
         if: ${{ failure() && steps.publish.outcome == 'failure' }}
         uses: actions/upload-artifact@v3
